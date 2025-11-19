@@ -3,6 +3,9 @@ import {ref, computed} from "vue";
 
 import countersData from "@/assets/counters.js";
 import CounterComp from "@/components/CounterComp.vue";
+import { useCounterStore } from "@/stores/counter.js";
+
+const store = useCounterStore();
 
 // State
 const counters = ref(countersData);
@@ -28,9 +31,9 @@ const getSum = computed(() => {
 <template>
   <div class="counters">
     <h2>
-      Sum of counters: <span>{{ getSum }}</span>
+      Sum of counters: <span>{{store.getSum }}</span>
     </h2>
-    <CounterComp @decrementCount="decrement" @incrementCount="increment" v-for="counter in counters" :key="counter.id" :counter="counter"></CounterComp>
+    <CounterComp v-for="counter in counters" :key="counter.id" :counter="counter"></CounterComp>
   </div>
 </template>
 
